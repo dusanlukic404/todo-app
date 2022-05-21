@@ -1,0 +1,243 @@
+@use "reset" as *;
+@use "colors" as *;
+@use "typography" as *;
+@use "mixins" as *;
+
+$border-radius: 0.5rem;
+$gap: 2rem;
+$gap-medium: 1.5rem;
+
+// Main stiles for app
+%todo-check {
+  -webkit-appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--todo-input);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+body::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image: url("../images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: var(--main-background);
+
+  @include medium {
+    background-image: url("../images/bg-mobile-light.jpg");
+    background-size: 100vw 30vh;
+  }
+}
+
+.container {
+  width: min(58rem, 90%);
+  margin-inline: auto;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 7.3rem 2.8rem;
+}
+
+.theme-btn {
+  cursor: pointer;
+}
+
+.todo-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: $gap;
+  background-color: var(--todo-background);
+  padding: 1.2rem 1.6rem;
+  border-radius: $border-radius;
+
+  @include medium {
+    gap: $gap-medium;
+  }
+
+  .input-check {
+    @extend %todo-check;
+  }
+
+  .todo-input {
+    border: none;
+    caret-color: $blue;
+    background-color: inherit;
+    flex-grow: 1;
+    max-width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.todo-box {
+  width: 100%;
+  background-color: var(--todo-background);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  margin-top: 5rem;
+  box-shadow: 0 25px 30px var(--box-shadow);
+
+  @include medium {
+    margin-top: 2rem;
+  }
+
+  .todo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > * {
+      width: 100%;
+    }
+
+    .filter {
+      display: flex;
+      gap: 2rem;
+
+      @include medium {
+        display: none;
+      }
+    }
+
+    .clear {
+      text-align: right;
+    }
+  }
+}
+
+.todo-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $gap;
+  cursor: pointer;
+  color: var(--todo-text);
+  transition: all 300ms ease;
+  border-bottom: 1px solid var(--todo-border);
+
+  @include medium {
+    gap: $gap-medium;
+  }
+
+  &:hover {
+    color: var(--todo-text-hover);
+  }
+
+  .todo-check {
+    @extend %todo-check;
+    position: relative;
+    overflow: hidden;
+    transition: all 300ms ease;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      opacity: 0;
+      transition: all 300ms ease;
+    }
+
+    &::before {
+      inset: 0;
+      background-image: $checked-background;
+      background-size: contain;
+    }
+
+    &::after {
+      background-image: url("../images/icon-check.svg");
+      background-repeat: no-repeat;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+      height: 25px;
+      width: 25px;
+      transform: translate(-20%, -15%);
+    }
+  }
+
+  &:hover .btn-delete-todo {
+    opacity: 1;
+  }
+
+  .btn-delete-todo {
+    position: absolute;
+    right: 1.6rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 300ms ease;
+
+    @include medium {
+      opacity: 1;
+    }
+  }
+}
+
+.todo-item,
+.todo-footer {
+  padding: 1.2rem 1.6rem;
+}
+
+.todo-item--deleted {
+  transform: translateX(10rem);
+  opacity: 0;
+}
+
+footer {
+  position: relative;
+  text-align: center;
+  padding-block: 4rem 2rem;
+}
+
+.btn-filter {
+  transition: all 300ms ease;
+}
+
+.btn-filter--active {
+  color: $blue;
+}
+
+.todo-check.todo-check--active {
+  .todo-check::before,
+  .todo-check::after {
+    opacity: 1;
+  }
+}
+
+.filter-mobile {
+  display: none;
+
+  @include medium {
+    width: 100%;
+    margin-top: 2rem;
+    background-color: var(--todo-background);
+    padding-block: 1.2rem;
+    border-radius: $border-radius;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    gap: $gap-medium;
+  }
+}
+
+.todo-check.todo-check--active {
+  border: none;
+
+  &::before,
+  &::after {
+    opacity: 1;
+  }
+}

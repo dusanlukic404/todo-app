@@ -1,0 +1,51 @@
+// Primary colors
+$blue: hsl(220, 98%, 61%);
+$checked-background: linear-gradient(
+  135deg,
+  hsl(192, 100%, 67%),
+  hsl(280, 87%, 65%)
+);
+
+:root {
+  // Light Theme colors
+  --todo-background-light: hsl(0, 0%, 98%);
+  --main-background-light: hsl(236, 33%, 92%);
+  --todo-text-light: hsl(235, 19%, 35%);
+  --todo-text-hover-light: hsl(235, 19%, 28%);
+  --todo-input-light: hsl(236, 9%, 61%);
+  --todo-completed-light: hsl(233, 11%, 84%);
+  --todo-border-light: hsl(236, 33%, 92%);
+  --box-shadow-light: hsl(230, 14%, 85%);
+
+  // Dark Theme colors
+  --main-background-dark: #161722;
+  --todo-background-dark: #25273c;
+  --todo-text-dark: #cacde8;
+  --todo-text-hover-dark: #e4e5f1;
+  --todo-input-dark: #777a92;
+  --todo-completed-dark: #4d5066;
+  --todo-border-dark: #393a4c; // ne znam gde je ova boja
+  --box-shadow-dark: hsl(240, 21%, 7%);
+}
+
+body[data-theme="light"] {
+  --todo-background: var(--todo-background-light);
+  --main-background: var(--main-background-light);
+  --todo-text: var(--todo-text-light);
+  --todo-text-hover: var(--todo-text-hover-light);
+  --todo-input: var(--todo-input-light);
+  --todo-completed: var(--todo-completed-light);
+  --todo-border: var(--todo-border-light);
+  --box-shadow: var(--box-shadow-light);
+}
+
+body[data-theme="dark"] {
+  --todo-background: var(--todo-background-dark);
+  --main-background: var(--main-background-dark);
+  --todo-text: var(--todo-text-dark);
+  --todo-text-hover: var(--todo-text-hover-dark);
+  --todo-input: var(--todo-input-dark);
+  --todo-completed: var(--todo-completed-dark);
+  --todo-border: var(--todo-border-dark);
+  --box-shadow: var(--box-shadow-dark);
+}
