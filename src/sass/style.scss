@@ -18,22 +18,39 @@ $gap-medium: 1.5rem;
   background-color: transparent;
 }
 
-body::before {
+// body::before {
+//   position: absolute;
+//   content: "";
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   z-index: -1;
+//   background-image: url("../images/bg-desktop-light.jpg");
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   background-color: var(--main-background);
+
+//   @include medium {
+//     background-image: url("../images/bg-mobile-light.jpg");
+//     background-size: 100vw 30%;
+//   }
+// }
+
+#header-img {
   position: absolute;
-  content: "";
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
   z-index: -1;
+  width: 100%;
+  height: 30rem;
   background-image: url("../images/bg-desktop-light.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-color: var(--main-background);
 
   @include medium {
     background-image: url("../images/bg-mobile-light.jpg");
-    background-size: 100vw 30%;
+    height: 25rem;
   }
 }
 
