@@ -1,6 +1,13 @@
 "use strict";
 
+// Main JS code for Application
 import imgCross from "../images/icon-cross.svg";
+import imgSun from "../images/icon-sun.svg";
+import imgMoon from "../images/icon-moon.svg";
+import imgDesktopDark from "../images/bg-desktop-dark.jpg";
+import imgDesktopLight from "../images/bg-desktop-light.jpg";
+import imgMobileDark from "../images/bg-mobile-dark.jpg";
+import imgMobileLight from "../images/bg-mobile-light.jpg";
 
 const todoInput = document.querySelector(".todo-input");
 const todoContainer = document.querySelector(".todo-list");
@@ -25,7 +32,7 @@ function removeItem() {
 }
 
 function addTodo() {
-  let todo = `<li class="todo-item">
+  let todo = `<li class="todo-item" draggable="true">
               <input
                 type="checkbox"
                 class="todo-check"
@@ -169,5 +176,74 @@ filterContainer.forEach(function (filters) {
   });
 });
 
-// Namestiti dark/light switcher
-// kontrolisati local storage da se podaci ne brisu kad se izadje sa stranice
+// Dark/light mode toggling
+const themeBtn = document.querySelector("#theme-btn");
+const themeImg = document.querySelector(".theme-img");
+const headerImg = document.querySelector("#header-img");
+let theme = localStorage.getItem("theme");
+
+const setDarkTheme = function () {
+  document.querySelector("body").dataset.theme = "dark";
+  localStorage.setItem("theme", "dark");
+  themeImg.src = `${imgSun}`;
+
+  if (window.matchMedia("max-width(930px)").matches) {
+    headerImg.style.backgroundImage = `url(${imgMobileDark})`;
+  } else {
+    headerImg.style.backgroundImage = `url(${imgDesktopDark})`;
+  }
+};
+
+const setLightTheme = function () {
+  document.querySelector("body").dataset.theme = "light";
+  localStorage.setItem("theme", "light");
+  themeImg.src = `${imgMoon}`;
+
+  if (window.matchMedia("max-width(930px)").matches) {
+    headerImg.style.backgroundImage = `url(${imgMobileLight})`;
+  } else {
+    headerImg.style.backgroundImage = `url(${imgDesktopLight})`;
+  }
+};
+
+if (theme === "dark") {
+  setDarkTheme();
+} else {
+  setLightTheme();
+}
+
+themeBtn.addEventListener("click", function () {
+  theme = localStorage.getItem("theme");
+  if (theme === "light") {
+    setDarkTheme();
+  } else {
+    setLightTheme();
+  }
+});
+
+function checkTheme() {
+  if (
+    theme === "dark" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    setDarkTheme();
+  } else if (
+    theme === "light" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    setLightTheme();
+  } else if (
+    theme === "dark" &&
+    window.matchMedia("(prefers-color-scheme: light)").matches
+  ) {
+    setDarkTheme();
+  } else {
+    setLightTheme();
+  }
+}
+
+window.addEventListener("load", checkTheme());
+
+// Making todos draggable
+
+// Saving todos at local storage

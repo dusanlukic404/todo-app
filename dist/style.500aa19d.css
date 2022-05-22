@@ -156,6 +156,11 @@ footer {
   background-color: transparent;
 }
 
+body {
+  background-color: var(--main-background);
+  transition: background-color 300ms ease;
+}
+
 #header-img {
   position: absolute;
   top: 0;
@@ -186,7 +191,9 @@ footer {
   padding-block: 7.3rem 2.8rem;
 }
 
-.theme-btn {
+#theme-btn {
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -198,6 +205,7 @@ footer {
   background-color: var(--todo-background);
   padding: 1.2rem 1.6rem;
   border-radius: 0.5rem;
+  transition: background-color 300ms ease;
 }
 @media (max-width: 930px) {
   .todo-form {
@@ -210,6 +218,7 @@ footer {
   background-color: inherit;
   flex-grow: 1;
   max-width: 100%;
+  transition: background-color 300ms ease;
 }
 .todo-form .todo-input:focus {
   outline: none;

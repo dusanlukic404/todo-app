@@ -119,10 +119,34 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"images/icon-cross.svg":[function(require,module,exports) {
 module.exports = "/icon-cross.861255e5.svg";
+},{}],"images/icon-sun.svg":[function(require,module,exports) {
+module.exports = "/icon-sun.e8063967.svg";
+},{}],"images/icon-moon.svg":[function(require,module,exports) {
+module.exports = "/icon-moon.4401c989.svg";
+},{}],"images/bg-desktop-dark.jpg":[function(require,module,exports) {
+module.exports = "/bg-desktop-dark.0d96dc95.jpg";
+},{}],"images/bg-desktop-light.jpg":[function(require,module,exports) {
+module.exports = "/bg-desktop-light.6b6aa610.jpg";
+},{}],"images/bg-mobile-dark.jpg":[function(require,module,exports) {
+module.exports = "/bg-mobile-dark.824fb2b7.jpg";
+},{}],"images/bg-mobile-light.jpg":[function(require,module,exports) {
+module.exports = "/bg-mobile-light.d5335c35.jpg";
 },{}],"js/script.js":[function(require,module,exports) {
-"use strict";
+"use strict"; // Main JS code for Application
 
 var _iconCross = _interopRequireDefault(require("../images/icon-cross.svg"));
+
+var _iconSun = _interopRequireDefault(require("../images/icon-sun.svg"));
+
+var _iconMoon = _interopRequireDefault(require("../images/icon-moon.svg"));
+
+var _bgDesktopDark = _interopRequireDefault(require("../images/bg-desktop-dark.jpg"));
+
+var _bgDesktopLight = _interopRequireDefault(require("../images/bg-desktop-light.jpg"));
+
+var _bgMobileDark = _interopRequireDefault(require("../images/bg-mobile-dark.jpg"));
+
+var _bgMobileLight = _interopRequireDefault(require("../images/bg-mobile-light.jpg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -155,7 +179,7 @@ function removeItem() {
 }
 
 function addTodo() {
-  var todo = "<li class=\"todo-item\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
+  var todo = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
   todoList.insertAdjacentHTML("afterbegin", todo);
   addItem();
   document.querySelectorAll(".btn-all").forEach(function (btn) {
@@ -286,9 +310,68 @@ filterContainer.forEach(function (filters) {
       _iterator.f();
     }
   });
-}); // Namestiti dark/light switcher
-// kontrolisati local storage da se podaci ne brisu kad se izadje sa stranice
-},{"../images/icon-cross.svg":"images/icon-cross.svg"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}); // Dark/light mode toggling
+
+var themeBtn = document.querySelector("#theme-btn");
+var themeImg = document.querySelector(".theme-img");
+var headerImg = document.querySelector("#header-img");
+var theme = localStorage.getItem("theme");
+
+var setDarkTheme = function setDarkTheme() {
+  document.querySelector("body").dataset.theme = "dark";
+  localStorage.setItem("theme", "dark");
+  themeImg.src = "".concat(_iconSun.default);
+
+  if (window.matchMedia("max-width(930px)").matches) {
+    headerImg.style.backgroundImage = "url(".concat(_bgMobileDark.default, ")");
+  } else {
+    headerImg.style.backgroundImage = "url(".concat(_bgDesktopDark.default, ")");
+  }
+};
+
+var setLightTheme = function setLightTheme() {
+  document.querySelector("body").dataset.theme = "light";
+  localStorage.setItem("theme", "light");
+  themeImg.src = "".concat(_iconMoon.default);
+
+  if (window.matchMedia("max-width(930px)").matches) {
+    headerImg.style.backgroundImage = "url(".concat(_bgMobileLight.default, ")");
+  } else {
+    headerImg.style.backgroundImage = "url(".concat(_bgDesktopLight.default, ")");
+  }
+};
+
+if (theme === "dark") {
+  setDarkTheme();
+} else {
+  setLightTheme();
+}
+
+themeBtn.addEventListener("click", function () {
+  theme = localStorage.getItem("theme");
+
+  if (theme === "light") {
+    setDarkTheme();
+  } else {
+    setLightTheme();
+  }
+});
+
+function checkTheme() {
+  if (theme === "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setDarkTheme();
+  } else if (theme === "light" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setLightTheme();
+  } else if (theme === "dark" && window.matchMedia("(prefers-color-scheme: light)").matches) {
+    setDarkTheme();
+  } else {
+    setLightTheme();
+  }
+}
+
+window.addEventListener("load", checkTheme()); // Making todos draggable
+// Saving todos at local storage
+},{"../images/icon-cross.svg":"images/icon-cross.svg","../images/icon-sun.svg":"images/icon-sun.svg","../images/icon-moon.svg":"images/icon-moon.svg","../images/bg-desktop-dark.jpg":"images/bg-desktop-dark.jpg","../images/bg-desktop-light.jpg":"images/bg-desktop-light.jpg","../images/bg-mobile-dark.jpg":"images/bg-mobile-dark.jpg","../images/bg-mobile-light.jpg":"images/bg-mobile-light.jpg"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -316,7 +399,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60668" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61482" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

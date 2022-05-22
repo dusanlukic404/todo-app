@@ -20,9 +20,11 @@
       <div class="container">
         <div class="app-header">
           <h1 id="logo">Todo</h1>
-          <img src="./images/icon-moon.svg" class="theme-btn" alt="Switch on dark theme" />
+          <button id="theme-btn" aria-label="Toggle dark mode">
+            <img src="./images/icon-moon.svg" class="theme-img" alt="Light theme">
+          </button>
         </div>
-          <form class="todo-form">
+          <form class="todo-form" aria-label="Add your task">
             <input type="checkbox" class="input-check" aria-label="Add todo" />
             <input type="text" class="todo-input" placeholder="Create a new todo..." />
          </form>
@@ -40,10 +42,10 @@
               <span class="items-number">items</span> left
             </div>
             <ul class="filter">
-              <li><button class="btn-filter btn-all" data-filter="all">All</button></li>
-              <li><button class="btn-filter btn-active" data-filter="active">Active</button></li>
+              <li><button class="btn-filter btn-all" aria-label="Filter by all" data-filter="all">All</button></li>
+              <li><button class="btn-filter btn-active" aria-label="Filter by active ones" data-filter="active">Active</button></li>
               <li>
-                <button class="btn-filter btn-completed" data-filter="completed">Completed</button>
+                <button class="btn-filter btn-completed" aria-label="Filter by completed" data-filter="completed">Completed</button>
               </li>
             </ul>
             <div class="clear">

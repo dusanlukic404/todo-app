@@ -18,24 +18,10 @@ $gap-medium: 1.5rem;
   background-color: transparent;
 }
 
-// body::before {
-//   position: absolute;
-//   content: "";
-//   top: 0;
-//   left: 0;
-//   width: 100vw;
-//   height: 100vh;
-//   z-index: -1;
-//   background-image: url("../images/bg-desktop-light.jpg");
-//   background-repeat: no-repeat;
-//   background-size: contain;
-//   background-color: var(--main-background);
-
-//   @include medium {
-//     background-image: url("../images/bg-mobile-light.jpg");
-//     background-size: 100vw 30%;
-//   }
-// }
+body {
+  background-color: var(--main-background);
+  transition: background-color 300ms ease;
+}
 
 #header-img {
   position: absolute;
@@ -66,7 +52,9 @@ $gap-medium: 1.5rem;
   padding-block: 7.3rem 2.8rem;
 }
 
-.theme-btn {
+#theme-btn {
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -78,6 +66,7 @@ $gap-medium: 1.5rem;
   background-color: var(--todo-background);
   padding: 1.2rem 1.6rem;
   border-radius: $border-radius;
+  transition: background-color 300ms ease;
 
   @include medium {
     gap: $gap-medium;
@@ -93,6 +82,7 @@ $gap-medium: 1.5rem;
     background-color: inherit;
     flex-grow: 1;
     max-width: 100%;
+    transition: background-color 300ms ease;
 
     &:focus {
       outline: none;
