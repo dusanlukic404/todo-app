@@ -156,6 +156,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+// For app
 var todoInput = document.querySelector(".todo-input");
 var todoContainer = document.querySelector(".todo-list");
 var filterContainer = document.querySelectorAll(".filter");
@@ -163,7 +164,56 @@ var clearAllBtn = document.querySelector(".btn-clear");
 var addTodoBtn = document.querySelector(".input-check");
 var itemNumber = document.querySelector(".items-counter");
 var itemSpan = document.querySelector(".items-number");
-var itemCounter = 0;
+var itemCounter = 0; // For dark/light theme
+
+var themeBtn = document.querySelector("#theme-btn");
+var themeImg = document.querySelector(".theme-img");
+var headerImg = document.querySelector("#header-img");
+var theme = localStorage.getItem("theme"); // Saving todos at local storage
+
+function saveToLocalStorage(todo) {
+  var todos;
+
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  todos.push(todo);
+  localStorage.setItem("todoData", JSON.stringify(todos));
+} // Displaying todos from local storage
+
+
+function getTodos() {
+  var todos;
+
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  todos.forEach(function (todo) {
+    var html = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todo, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
+    todoContainer.insertAdjacentHTML("afterbegin", html);
+    addItem();
+  });
+}
+
+function removeLocalTodos(todo) {
+  var todos;
+
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  var todoIndex = todo.children[1].innerText;
+  todos.splice(todos.indexOf(todoIndex), 1);
+  localStorage.setItem("todoData", JSON.stringify(todos));
+}
 
 function addItem() {
   itemCounter++;
@@ -181,6 +231,8 @@ function addTodo() {
   var todo = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
   todoContainer.insertAdjacentHTML("afterbegin", todo);
   addItem();
+  saveToLocalStorage(todoInput.value);
+  todoInput.value = "";
   document.querySelectorAll(".btn-all").forEach(function (btn) {
     return btn.classList.add("btn-filter--active");
   });
@@ -193,6 +245,7 @@ function removeTodo(event) {
   todo.addEventListener("transitionend", function () {
     todo.remove();
   });
+  removeLocalTodos(todo);
 
   if (!event.target.previousElementSibling.classList.contains("todo-completed")) {
     removeItem();
@@ -221,13 +274,11 @@ function completedTodo(event) {
 todoInput.addEventListener("keypress", function (e) {
   if (e.key === "Enter" && todoInput.value !== "") {
     addTodo();
-    todoInput.value = "";
   } else return;
 });
 addTodoBtn.addEventListener("click", function () {
   if (todoInput.value !== "") {
     addTodo();
-    todoInput.value = "";
   } else return;
 });
 window.addEventListener("keypress", function (e) {
@@ -245,7 +296,9 @@ clearAllBtn.addEventListener("click", function () {
   var filterBtns = document.querySelectorAll(".btn-filter");
   filterBtns.forEach(function (btn) {
     return btn.classList.remove("btn-filter--active");
-  });
+  }); // Removing all todos from local storage
+
+  localStorage.clear();
 });
 todoContainer.addEventListener("click", function (e) {
   removeTodo(e);
@@ -311,11 +364,6 @@ filterContainer.forEach(function (filters) {
   });
 }); // Dark/light mode toggling
 
-var themeBtn = document.querySelector("#theme-btn");
-var themeImg = document.querySelector(".theme-img");
-var headerImg = document.querySelector("#header-img");
-var theme = localStorage.getItem("theme");
-
 var setDarkTheme = function setDarkTheme() {
   document.querySelector("body").dataset.theme = "dark";
   localStorage.setItem("theme", "dark");
@@ -354,7 +402,7 @@ themeBtn.addEventListener("click", function () {
   } else {
     setLightTheme();
   }
-});
+}); // Checking theme on user device
 
 function checkTheme() {
   if (theme === "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -368,8 +416,11 @@ function checkTheme() {
   }
 }
 
-window.addEventListener("load", checkTheme()); // Making todos draggable
-// Saving todos at local storage
+window.addEventListener("load", function () {
+  checkTheme();
+}); // Displaying todos from local storage when page loads
+
+document.addEventListener("DOMContentLoaded", getTodos);
 },{"../images/icon-cross.svg":"images/icon-cross.svg","../images/icon-sun.svg":"images/icon-sun.svg","../images/icon-moon.svg":"images/icon-moon.svg","../images/bg-desktop-dark.jpg":"images/bg-desktop-dark.jpg","../images/bg-desktop-light.jpg":"images/bg-desktop-light.jpg","../images/bg-mobile-dark.jpg":"images/bg-mobile-dark.jpg","../images/bg-mobile-light.jpg":"images/bg-mobile-light.jpg"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -398,7 +449,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63128" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58886" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -9,6 +9,7 @@ import imgDesktopLight from "../images/bg-desktop-light.jpg";
 import imgMobileDark from "../images/bg-mobile-dark.jpg";
 import imgMobileLight from "../images/bg-mobile-light.jpg";
 
+// For app
 const todoInput = document.querySelector(".todo-input");
 const todoContainer = document.querySelector(".todo-list");
 const filterContainer = document.querySelectorAll(".filter");
@@ -17,6 +18,68 @@ const addTodoBtn = document.querySelector(".input-check");
 const itemNumber = document.querySelector(".items-counter");
 const itemSpan = document.querySelector(".items-number");
 let itemCounter = 0;
+
+// For dark/light theme
+const themeBtn = document.querySelector("#theme-btn");
+const themeImg = document.querySelector(".theme-img");
+const headerImg = document.querySelector("#header-img");
+let theme = localStorage.getItem("theme");
+
+// Saving todos at local storage
+function saveToLocalStorage(todo) {
+  let todos;
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  todos.push(todo);
+  localStorage.setItem("todoData", JSON.stringify(todos));
+}
+
+// Displaying todos from local storage
+function getTodos() {
+  let todos;
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  todos.forEach(function (todo) {
+    let html = `<li class="todo-item" draggable="true">
+              <input
+                type="checkbox"
+                class="todo-check"
+                name=""
+                id=""
+                aria-label="Select todo"
+              />
+              <p class="todo">${todo}</p>
+              <img
+                src=${imgCross}
+                alt="Delete todo"
+                class="btn-delete-todo"
+              />
+            </li>`;
+    todoContainer.insertAdjacentHTML("afterbegin", html);
+    addItem();
+  });
+}
+
+function removeLocalTodos(todo) {
+  let todos;
+  if (localStorage.getItem("todoData") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todoData"));
+  }
+
+  let todoIndex = todo.children[1].innerText;
+  todos.splice(todos.indexOf(todoIndex), 1);
+  localStorage.setItem("todoData", JSON.stringify(todos));
+}
 
 function addItem() {
   itemCounter++;
@@ -48,6 +111,8 @@ function addTodo() {
             </li>`;
   todoContainer.insertAdjacentHTML("afterbegin", todo);
   addItem();
+  saveToLocalStorage(todoInput.value);
+  todoInput.value = "";
   document
     .querySelectorAll(".btn-all")
     .forEach((btn) => btn.classList.add("btn-filter--active"));
@@ -61,6 +126,8 @@ function removeTodo(event) {
   todo.addEventListener("transitionend", function () {
     todo.remove();
   });
+
+  removeLocalTodos(todo);
 
   if (
     !event.target.previousElementSibling.classList.contains("todo-completed")
@@ -97,14 +164,12 @@ function completedTodo(event) {
 todoInput.addEventListener("keypress", function (e) {
   if (e.key === "Enter" && todoInput.value !== "") {
     addTodo();
-    todoInput.value = "";
   } else return;
 });
 
 addTodoBtn.addEventListener("click", function () {
   if (todoInput.value !== "") {
     addTodo();
-    todoInput.value = "";
   } else return;
 });
 
@@ -124,6 +189,9 @@ clearAllBtn.addEventListener("click", function () {
   itemNumber.textContent = 0;
   const filterBtns = document.querySelectorAll(".btn-filter");
   filterBtns.forEach((btn) => btn.classList.remove("btn-filter--active"));
+
+  // Removing all todos from local storage
+  localStorage.clear();
 });
 
 todoContainer.addEventListener("click", function (e) {
@@ -176,11 +244,6 @@ filterContainer.forEach(function (filters) {
 });
 
 // Dark/light mode toggling
-const themeBtn = document.querySelector("#theme-btn");
-const themeImg = document.querySelector(".theme-img");
-const headerImg = document.querySelector("#header-img");
-let theme = localStorage.getItem("theme");
-
 const setDarkTheme = function () {
   document.querySelector("body").dataset.theme = "dark";
   localStorage.setItem("theme", "dark");
@@ -220,6 +283,7 @@ themeBtn.addEventListener("click", function () {
   }
 });
 
+// Checking theme on user device
 function checkTheme() {
   if (
     theme === "dark" &&
@@ -241,8 +305,9 @@ function checkTheme() {
   }
 }
 
-window.addEventListener("load", checkTheme());
+window.addEventListener("load", function () {
+  checkTheme();
+});
 
-// Making todos draggable
-
-// Saving todos at local storage
+// Displaying todos from local storage when page loads
+document.addEventListener("DOMContentLoaded", getTodos);
