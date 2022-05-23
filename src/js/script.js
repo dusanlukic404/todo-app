@@ -2,7 +2,6 @@
 
 //Library for drag and drop
 // import Sortable from "sortablejs";
-import { Sortable } from "agnostic-draggable";
 
 // Images
 import imgCross from "../images/icon-cross.svg";
@@ -44,14 +43,6 @@ let theme = localStorage.getItem("theme");
 //     return true;
 //   } else return false;
 // };
-
-const dragging = document.querySelector("#dragging-list");
-new Sortable(dragging, {
-  axis: "y",
-  appendTo: document.querySelector(".todo-item"),
-  opacity: 0.5,
-  skip: "input, img",
-});
 
 // Saving todos at local storage
 function saveToLocalStorage(todo) {
