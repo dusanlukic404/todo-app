@@ -46,6 +46,7 @@ Users should be able to:
 - SASS variables, mixins, modules, nesting
 - Vanilla JS
 - Desktop-first
+- SortableJS library
 
 ### What I learned
 
@@ -55,6 +56,7 @@ Through coding and creating this amazing app I learned a lot of Vanilla JS.
 - How to refactor code and make it readeble with functions
 - Traversing the DOM
 - How to use and manipulate with Local Storage
+- SortableJS library
 
 ## Author
 
