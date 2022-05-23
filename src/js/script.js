@@ -12,7 +12,6 @@ import imgMobileLight from "../images/bg-mobile-light.jpg";
 const todoInput = document.querySelector(".todo-input");
 const todoContainer = document.querySelector(".todo-list");
 const filterContainer = document.querySelectorAll(".filter");
-const todoList = document.querySelector(".todo-list");
 const clearAllBtn = document.querySelector(".btn-clear");
 const addTodoBtn = document.querySelector(".input-check");
 const itemNumber = document.querySelector(".items-counter");
@@ -47,7 +46,7 @@ function addTodo() {
                 class="btn-delete-todo"
               />
             </li>`;
-  todoList.insertAdjacentHTML("afterbegin", todo);
+  todoContainer.insertAdjacentHTML("afterbegin", todo);
   addItem();
   document
     .querySelectorAll(".btn-all")
@@ -120,7 +119,7 @@ window.addEventListener("load", function () {
 });
 
 clearAllBtn.addEventListener("click", function () {
-  todoList.innerHTML = "";
+  todoContainer.innerHTML = "";
   itemCounter = 0;
   itemNumber.textContent = 0;
   const filterBtns = document.querySelectorAll(".btn-filter");
@@ -145,12 +144,12 @@ filterContainer.forEach(function (filters) {
     const selectedBtn = e.target;
     selectedBtn.classList.add("btn-filter--active");
 
-    if (todoList.children.length === 0) {
+    if (todoContainer.children.length === 0) {
       selectedBtn.classList.remove("btn-filter--active");
     }
 
     // Filtering Todos
-    const todos = todoList.children; // HTML Collection
+    const todos = todoContainer.children; // HTML Collection
 
     for (const todo of todos) {
       switch (selectedBtn.dataset.filter) {

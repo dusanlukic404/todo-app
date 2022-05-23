@@ -215,7 +215,7 @@ body {
 .todo-form .todo-input {
   border: none;
   caret-color: hsl(220deg, 98%, 61%);
-  background-color: inherit;
+  background-color: var(--todo-background);
   flex-grow: 1;
   max-width: 100%;
   transition: background-color 300ms ease;
@@ -231,6 +231,7 @@ body {
   border-radius: 0.5rem;
   margin-top: 5rem;
   box-shadow: 0 25px 30px var(--box-shadow);
+  transition: background-color 300ms ease;
 }
 @media (max-width: 930px) {
   .todo-box {

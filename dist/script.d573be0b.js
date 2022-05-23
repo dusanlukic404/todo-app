@@ -159,7 +159,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var todoInput = document.querySelector(".todo-input");
 var todoContainer = document.querySelector(".todo-list");
 var filterContainer = document.querySelectorAll(".filter");
-var todoList = document.querySelector(".todo-list");
 var clearAllBtn = document.querySelector(".btn-clear");
 var addTodoBtn = document.querySelector(".input-check");
 var itemNumber = document.querySelector(".items-counter");
@@ -180,7 +179,7 @@ function removeItem() {
 
 function addTodo() {
   var todo = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
-  todoList.insertAdjacentHTML("afterbegin", todo);
+  todoContainer.insertAdjacentHTML("afterbegin", todo);
   addItem();
   document.querySelectorAll(".btn-all").forEach(function (btn) {
     return btn.classList.add("btn-filter--active");
@@ -240,7 +239,7 @@ window.addEventListener("load", function () {
   todoInput.value = "";
 });
 clearAllBtn.addEventListener("click", function () {
-  todoList.innerHTML = "";
+  todoContainer.innerHTML = "";
   itemCounter = 0;
   itemNumber.textContent = 0;
   var filterBtns = document.querySelectorAll(".btn-filter");
@@ -266,12 +265,12 @@ filterContainer.forEach(function (filters) {
     var selectedBtn = e.target;
     selectedBtn.classList.add("btn-filter--active");
 
-    if (todoList.children.length === 0) {
+    if (todoContainer.children.length === 0) {
       selectedBtn.classList.remove("btn-filter--active");
     } // Filtering Todos
 
 
-    var todos = todoList.children; // HTML Collection
+    var todos = todoContainer.children; // HTML Collection
 
     var _iterator = _createForOfIteratorHelper(todos),
         _step;
@@ -399,7 +398,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61482" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63128" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
