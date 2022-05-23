@@ -1,7 +1,7 @@
 "use strict";
 
-// Library for drag and drop
-// import Sortable from "sortablejs";
+//Library for drag and drop
+import Sortable from "sortablejs";
 
 // Images
 import imgCross from "../images/icon-cross.svg";
@@ -28,12 +28,20 @@ const themeImg = document.querySelector(".theme-img");
 const headerImg = document.querySelector("#header-img");
 let theme = localStorage.getItem("theme");
 
-// For drag and drop
-// const dragging = document.querySelector("#dragging-list");
-// new Sortable(dragging, {
-//   animation: 150,
-//   ghostClass: "sortable-ghost",
-// });
+//For drag and drop
+const dragging = document.querySelector("#dragging-list");
+new Sortable(dragging, {
+  animation: 150,
+  ghostClass: "sortable-ghost",
+  shouldCancelStart: function (e) {
+    if (
+      e.target.classList.contains("todo-check") ||
+      e.target.classList.contains("btn-delete-todo")
+    ) {
+      return true;
+    } else return false;
+  },
+});
 
 // Saving todos at local storage
 function saveToLocalStorage(todo) {
@@ -104,7 +112,7 @@ function removeItem() {
 }
 
 function addTodo() {
-  let todo = `<li class="todo-item" draggable="true">
+  let todo = `<li class="todo-item">
               <input
                 type="checkbox"
                 class="todo-check"
