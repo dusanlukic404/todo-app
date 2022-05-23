@@ -3998,7 +3998,7 @@ function getTodos() {
   }
 
   todos.forEach(function (todo) {
-    var html = "<li class=\"todo-item\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todo, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
+    var html = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todo, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
     todoContainer.insertAdjacentHTML("afterbegin", html);
     addItem();
   });
@@ -4031,7 +4031,7 @@ function removeItem() {
 }
 
 function addTodo() {
-  var todo = "<li class=\"todo-item\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
+  var todo = "<li class=\"todo-item\" draggable=\"true\">\n              <input\n                type=\"checkbox\"\n                class=\"todo-check\"\n                name=\"\"\n                id=\"\"\n                aria-label=\"Select todo\"\n              />\n              <p class=\"todo\">".concat(todoInput.value, "</p>\n              <img\n                src=").concat(_iconCross.default, "\n                alt=\"Delete todo\"\n                class=\"btn-delete-todo\"\n              />\n            </li>");
   todoContainer.insertAdjacentHTML("afterbegin", todo);
   addItem();
   saveToLocalStorage(todoInput.value);
@@ -4252,7 +4252,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56291" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53669" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

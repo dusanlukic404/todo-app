@@ -33,7 +33,7 @@ const dragging = document.querySelector("#dragging-list");
 new Sortable(dragging, {
   animation: 150,
   ghostClass: "sortable-ghost",
-  shouldCancelStart: function (e) {
+  shouldCancelStart: (e) => {
     if (
       e.target.classList.contains("todo-check") ||
       e.target.classList.contains("btn-delete-todo")
@@ -66,7 +66,7 @@ function getTodos() {
   }
 
   todos.forEach(function (todo) {
-    let html = `<li class="todo-item">
+    let html = `<li class="todo-item" draggable="true">
               <input
                 type="checkbox"
                 class="todo-check"
@@ -112,7 +112,7 @@ function removeItem() {
 }
 
 function addTodo() {
-  let todo = `<li class="todo-item">
+  let todo = `<li class="todo-item" draggable="true">
               <input
                 type="checkbox"
                 class="todo-check"
