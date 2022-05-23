@@ -33,15 +33,16 @@ const dragging = document.querySelector("#dragging-list");
 new Sortable(dragging, {
   animation: 150,
   ghostClass: "sortable-ghost",
-  shouldCancelStart: (e) => {
-    if (
-      e.target.classList.contains("todo-check") ||
-      e.target.classList.contains("btn-delete-todo")
-    ) {
-      return true;
-    } else return false;
-  },
 });
+
+dragging.shouldCancelStart = function (e) {
+  if (
+    e.target.classList.contains("todo-check") ||
+    e.target.classList.contains("btn-delete-todo")
+  ) {
+    return true;
+  } else return false;
+};
 
 // Saving todos at local storage
 function saveToLocalStorage(todo) {
