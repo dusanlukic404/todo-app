@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [SOLUTION URL]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/todo-app-with-html-scss-and-vanilla-js-XP6nCxYfv2))
+- Live Site URL: [LIVE SITE](https://your-daily-todos.netlify.com)
 
 ### Built with
 
