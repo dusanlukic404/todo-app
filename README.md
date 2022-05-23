@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [SOLUTION URL]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/todo-app-with-html-scss-and-vanilla-js-XP6nCxYfv2))
+- Solution URL: [SOLUTION URL]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/todo-app-with-html-scss-and-vanilla-js-XP6nCxYfv2)
 - Live Site URL: [LIVE SITE](https://your-daily-todos.netlify.com)
 
 ### Built with
