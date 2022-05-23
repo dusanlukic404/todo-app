@@ -1,6 +1,9 @@
 "use strict";
 
-// Main JS code for Application
+// Library for drag and drop
+import Sortable from "sortablejs";
+
+// Images
 import imgCross from "../images/icon-cross.svg";
 import imgSun from "../images/icon-sun.svg";
 import imgMoon from "../images/icon-moon.svg";
@@ -25,6 +28,13 @@ const themeImg = document.querySelector(".theme-img");
 const headerImg = document.querySelector("#header-img");
 let theme = localStorage.getItem("theme");
 
+// For drag and drop
+const dragging = document.querySelector("#dragging-list");
+new Sortable(dragging, {
+  animation: 150,
+  ghostClass: "sortable-ghost",
+});
+
 // Saving todos at local storage
 function saveToLocalStorage(todo) {
   let todos;
@@ -48,7 +58,7 @@ function getTodos() {
   }
 
   todos.forEach(function (todo) {
-    let html = `<li class="todo-item" draggable="true">
+    let html = `<li class="todo-item">
               <input
                 type="checkbox"
                 class="todo-check"

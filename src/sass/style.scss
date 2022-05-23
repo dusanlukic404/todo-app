@@ -132,7 +132,7 @@ body {
   display: flex;
   align-items: center;
   gap: $gap;
-  cursor: pointer;
+  cursor: move;
   color: var(--todo-text);
   transition: all 300ms ease;
   border-bottom: 1px solid var(--todo-border);
