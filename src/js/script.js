@@ -1,7 +1,7 @@
 "use strict";
 
 // Library for drag and drop
-import Sortable from "sortablejs";
+// import Sortable from "sortablejs";
 
 // Images
 import imgCross from "../images/icon-cross.svg";
@@ -29,11 +29,11 @@ const headerImg = document.querySelector("#header-img");
 let theme = localStorage.getItem("theme");
 
 // For drag and drop
-const dragging = document.querySelector("#dragging-list");
-new Sortable(dragging, {
-  animation: 150,
-  ghostClass: "sortable-ghost",
-});
+// const dragging = document.querySelector("#dragging-list");
+// new Sortable(dragging, {
+//   animation: 150,
+//   ghostClass: "sortable-ghost",
+// });
 
 // Saving todos at local storage
 function saveToLocalStorage(todo) {
