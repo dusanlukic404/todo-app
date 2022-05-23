@@ -277,6 +277,9 @@ body {
 .todo-item:hover {
   color: var(--todo-text-hover);
 }
+.todo-item .todo {
+  width: 100%;
+}
 .todo-item .todo-check {
   position: relative;
   overflow: hidden;

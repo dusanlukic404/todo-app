@@ -145,6 +145,10 @@ body {
     color: var(--todo-text-hover);
   }
 
+  .todo {
+    width: 100%;
+  }
+
   .todo-check {
     @extend %todo-check;
     position: relative;
