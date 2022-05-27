@@ -62,4 +62,4 @@ Through coding and creating this amazing app I learned a lot of Vanilla JS.
 
 - Codepen - [@dusanlukic](https://codepen.io/dusanlukic)
 - Frontend Mentor - [@dusanlukic404](https://www.frontendmentor.io/profile/dusanlukic404)
-- Linkedin - [@dusan-lukic](https://www.linkedin.com/in/dusan-lukic/)
+- LinkedIn - [@dusan-lukic](https://www.linkedin.com/in/dusan-lukic/)
