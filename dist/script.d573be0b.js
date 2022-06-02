@@ -3952,7 +3952,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var todoInput = document.querySelector(".todo-input");
 var todoContainer = document.querySelector(".todo-list");
 var filterContainer = document.querySelectorAll(".filter");
-var clearAllBtn = document.querySelector(".btn-clear");
+var clearCompletedBtn = document.querySelector(".btn-clear");
 var addTodoBtn = document.querySelector(".input-check");
 var itemNumber = document.querySelector(".items-counter");
 var itemSpan = document.querySelector(".items-number");
@@ -4088,16 +4088,15 @@ window.addEventListener("keypress", function (e) {
 window.addEventListener("load", function () {
   todoInput.value = "";
 });
-clearAllBtn.addEventListener("click", function () {
-  todoContainer.innerHTML = "";
-  itemCounter = 0;
-  itemNumber.textContent = 0;
+clearCompletedBtn.addEventListener("click", function () {
+  var completedTodos = document.querySelectorAll(".todo-completed");
+  completedTodos.forEach(function (todo) {
+    todo.closest(".todo-item").remove();
+  });
   var filterBtns = document.querySelectorAll(".btn-filter");
   filterBtns.forEach(function (btn) {
     return btn.classList.remove("btn-filter--active");
-  }); // Removing all todos from local storage
-
-  localStorage.clear();
+  });
 });
 todoContainer.addEventListener("click", function (e) {
   removeTodo(e);
@@ -4213,13 +4212,13 @@ function checkTheme() {
   } else {
     setLightTheme();
   }
-}
+} // Displaying todos from local storage when content loads
 
-window.addEventListener("load", function () {
+
+document.addEventListener("DOMContentLoaded", function () {
   checkTheme();
-}); // Displaying todos from local storage when page loads
-
-document.addEventListener("DOMContentLoaded", getTodos);
+  getTodos();
+});
 },{"sortablejs":"../node_modules/sortablejs/modular/sortable.esm.js","../images/icon-cross.svg":"images/icon-cross.svg","../images/icon-sun.svg":"images/icon-sun.svg","../images/icon-moon.svg":"images/icon-moon.svg","../images/bg-desktop-dark.jpg":"images/bg-desktop-dark.jpg","../images/bg-desktop-light.jpg":"images/bg-desktop-light.jpg","../images/bg-mobile-dark.jpg":"images/bg-mobile-dark.jpg","../images/bg-mobile-light.jpg":"images/bg-mobile-light.jpg"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4248,7 +4247,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49864" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55452" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

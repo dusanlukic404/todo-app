@@ -278,7 +278,7 @@ body {
   color: var(--todo-text-hover);
 }
 .todo-item .todo {
-  width: 100%;
+  width: 85%;
 }
 .todo-item .todo-check {
   position: relative;

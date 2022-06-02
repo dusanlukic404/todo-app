@@ -16,7 +16,7 @@ import imgMobileLight from "../images/bg-mobile-light.jpg";
 const todoInput = document.querySelector(".todo-input");
 const todoContainer = document.querySelector(".todo-list");
 const filterContainer = document.querySelectorAll(".filter");
-const clearAllBtn = document.querySelector(".btn-clear");
+const clearCompletedBtn = document.querySelector(".btn-clear");
 const addTodoBtn = document.querySelector(".input-check");
 const itemNumber = document.querySelector(".items-counter");
 const itemSpan = document.querySelector(".items-number");
@@ -194,15 +194,14 @@ window.addEventListener("load", function () {
   todoInput.value = "";
 });
 
-clearAllBtn.addEventListener("click", function () {
-  todoContainer.innerHTML = "";
-  itemCounter = 0;
-  itemNumber.textContent = 0;
+clearCompletedBtn.addEventListener("click", function () {
+  const completedTodos = document.querySelectorAll(".todo-completed");
+  completedTodos.forEach((todo) => {
+    todo.closest(".todo-item").remove();
+  });
+
   const filterBtns = document.querySelectorAll(".btn-filter");
   filterBtns.forEach((btn) => btn.classList.remove("btn-filter--active"));
-
-  // Removing all todos from local storage
-  localStorage.clear();
 });
 
 todoContainer.addEventListener("click", function (e) {
@@ -316,9 +315,8 @@ function checkTheme() {
   }
 }
 
-window.addEventListener("load", function () {
+// Displaying todos from local storage when content loads
+document.addEventListener("DOMContentLoaded", function () {
   checkTheme();
+  getTodos();
 });
-
-// Displaying todos from local storage when page loads
-document.addEventListener("DOMContentLoaded", getTodos);
